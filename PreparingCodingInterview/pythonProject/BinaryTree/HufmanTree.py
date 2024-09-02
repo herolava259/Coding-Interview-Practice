@@ -93,7 +93,7 @@ class HuffmanTree:
         while len(heap) > 1:
             e1, e2 = heap.heap_pop(), heap.heap_pop()
 
-            e1.bit, e2.bit = False, True
+            e1.bit_code, e2.bit_code = False, True
 
             new_node = HuffmanNode(True, freq=e1.freq + e2.freq, left_node=e1, right_node=e2)
 
