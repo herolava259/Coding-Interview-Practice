@@ -1,5 +1,6 @@
 from typing import List
 
+
 class MedianFilter:
 
     def __init__(self):
@@ -12,10 +13,7 @@ class MedianFilter:
 
         cur_p = self.size
 
-
-
     def findMedian(self) -> float:
-
         if self.size % 2 == 0:
             return (self._heap[0] + self._heap[1]) / 2
 
