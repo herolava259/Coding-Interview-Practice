@@ -1,7 +1,7 @@
 from typing import List
 
 
-class FJBOfGraphSoution:
+class FJBOfGraphSolution:
 
     def __init__(self, m: int, n: int, g: List[List[int]]):
 
