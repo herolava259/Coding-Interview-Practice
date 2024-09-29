@@ -33,6 +33,8 @@ class FJBOfGraphSolution:
 
                 if self.low[v] == self.num[v]:
                     self.num_bridge += 1
+
+                #check whether u is joint in graph
                 if u == self.root:
                     if num_child > 1:
                         self.joint[u] = True
