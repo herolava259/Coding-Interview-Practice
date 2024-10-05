@@ -1,10 +1,12 @@
 from typing import List
 
+
 class Edge:
     def __init__(self, u, v, c):
         self.u = u
         self.v = v
         self.c = c
+
 
 class DSU:
     def __init__(self, n: int):
