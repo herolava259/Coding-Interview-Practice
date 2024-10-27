@@ -13,7 +13,7 @@ public class Subsets : ISolution<IList<IList<int>>>
         this.nums = nums;
         results = new List<IList<int>>();
 
-        results?.Append(new List<int>());
+        results.Add(new List<int>());
     }
     public void Initialize()
     {

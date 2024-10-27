@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSharpWithAlgorithm.Interfaces
-{
-    public interface ISolution<TResult>
-    {
-        void Initialize();
+namespace CSharpWithAlgorithm.Interfaces;
 
-        TResult Solve();
-    }
+public interface ISolution<TResult>
+{
+    void Initialize();
+
+    TResult Solve();
 }
