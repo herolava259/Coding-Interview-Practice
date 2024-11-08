@@ -2,6 +2,7 @@ from typing import List
 from LowestCommonAncestor import SparseTableLCASolution
 from RangeMinimumQuery import SparseTableRMQSolution
 
+
 class BuildingEulerPathInTree:
     def __init__(self, n: int, m: int, g: List[List[int]], root: int | None = None):
         self.m = m
@@ -77,8 +78,9 @@ class SumOfPathByLCASolution:
 
         return self.sum_to_root[u] + self.sum_to_root[v] - lca_to_root << 1
 
+
 class SumOfPathByRMQSolution:
-    def __init__(self, n: int,m:int, g: List[List[int]], root: int, values: List[int]):
+    def __init__(self, n: int, m: int, g: List[List[int]], root: int, values: List[int]):
         self.n = n
         self.m = m
         self.g = g
@@ -89,8 +91,8 @@ class SumOfPathByRMQSolution:
         self.tour: List[int] | None = None
         self.st: List[int] | None = None
         self.en: List[int] | None = None
-        self.parents: List[int] = [0 for _ in range(self.n+1)]
-        self.sums: List[int] = [-1 for _ in range(self.n+1)]
+        self.parents: List[int] = [0 for _ in range(self.n + 1)]
+        self.sums: List[int] = [-1 for _ in range(self.n + 1)]
 
     def dfs_build(self, u: int, p: int = -1):
         self.parents[u] = p
@@ -126,12 +128,6 @@ class SumOfPathByRMQSolution:
         return self.sums[u] + self.sums[v] - 2 * sum_p_lca
 
     def find_lca(self, first: int, last: int) -> int:
-        _, lca_arg_time = self.rmq_sln.query(first-1, last-1)
-        lca = self.flatten_tree.arg_time[lca_arg_time-1]
+        _, lca_arg_time = self.rmq_sln.query(first - 1, last - 1)
+        lca = self.flatten_tree.arg_time[lca_arg_time - 1]
         return lca
-
-
-
-
-
-

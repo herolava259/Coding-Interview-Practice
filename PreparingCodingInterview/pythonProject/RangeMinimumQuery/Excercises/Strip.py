@@ -63,8 +63,6 @@ class SparseTableRMQSolution:
         self.dp_max: List[List[int]] | None = None
 
     def build(self):
-        if self.dp is None:
-            return
         log_n = math.ceil(math.log(self.n, 2))
         self.dp_min = [[0 for _ in range(log_n)] for _ in range(self.n)]
         self.dp_max = [[0 for _ in range(log_n)] for _ in range(self.n)]

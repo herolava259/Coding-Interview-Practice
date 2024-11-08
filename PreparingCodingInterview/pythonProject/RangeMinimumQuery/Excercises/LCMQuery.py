@@ -1,5 +1,6 @@
 from typing import List
 
+
 def prime_sieve(n: int):
     is_prime = [True for _ in range(n + 2)]
 
