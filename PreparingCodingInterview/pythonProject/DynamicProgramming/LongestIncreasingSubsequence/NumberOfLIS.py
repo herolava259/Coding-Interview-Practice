@@ -37,7 +37,7 @@ class FenwickTree:
 class SegmentTree:
     def __init__(self, nums: List[int]):
         self.nums: List[int] = nums
-        self.st: List[int] = [0]
+        self.st: List[int] = [0] * (4* len(nums))
 
     def build(self, id: int, l: int, r: int):
         if l == r:
