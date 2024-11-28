@@ -135,9 +135,7 @@ class LongestValidObstacleSolution:
                 mid = ((low + high) >> 1) + 1
                 mid_key = order_dp[mid]
 
-                if mid_key == key:
-                    return mid
-                elif mid_key > key:
+                if mid_key > key:
                     high = mid - 1
                 else:
                     low = mid
@@ -152,23 +150,25 @@ class LongestValidObstacleSolution:
 
             k = self.obstacles[i]
             search_idx = binary_search(k)
+            if i == 8:
+                pass
 
             if search_idx == -1:
                 result[i] = 1
                 order_dp[0] = k
-            elif search_idx == len(order_dp):
+            elif search_idx >= len(order_dp)-1:
                 order_dp.append(k)
                 result[i] = len(order_dp)
             else:
-                result[i] = search_idx + 1
-                order_dp[search_idx] = k
+                result[i] = search_idx + 2
+                order_dp[search_idx+1] = min(k, order_dp[search_idx+1])
         return result
 
 
 
 
 
-obstacles1 = [118,99,282,465,18,427,361,415,160,449,464,293,25,238,380,300,465,426,203,128,62,168,295,382,346,380,112,463,26,354,414,435,367, 143]
+obstacles1 = [5,3,4,4,4,2,1,1,4,1]
 sln = LongestValidObstacleSolution(obstacles1)
 
 print(sln.bs_solve())
