@@ -1,6 +1,5 @@
 from typing import List
 
-
 class FindingKthPositiveSolution:
     def __init__(self, arr: List[int], k: int):
         self.arr: List[int] = arr
@@ -29,14 +28,8 @@ class FindingKthPositiveSolution:
 
         if num_missing < self.k:
             return self.arr[low] + self.k - num_missing
-
         while low > 0 and self.arr[low] == self.arr[low - 1] + 1:
             low -= 1
         return self.arr[low] - 1
 
 
-class Solution:
-    def findKthPositive(self, arr: List[int], k: int) -> int:
-        sln = FindingKthPositiveSolution(arr, k)
-
-        return sln.solve()

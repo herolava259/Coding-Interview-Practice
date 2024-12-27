@@ -4,7 +4,6 @@ from typing import List
 class HIndexIISolution:
     def __init__(self, citations: List[int]):
         self.citations: List[int] = citations
-
     def solve(self) -> int:
 
         low, high = 0, len(self.citations)
@@ -26,6 +25,3 @@ class HIndexIISolution:
         return low
 
 
-class Solution:
-    def hIndex(self, citations: List[int]) -> int:
-        return HIndexIISolution(citations).solve()
