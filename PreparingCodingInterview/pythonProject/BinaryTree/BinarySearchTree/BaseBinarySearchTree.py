@@ -31,7 +31,8 @@ class BinarySearchTree:
 
         return find_node(self.root, key)
 
-    def find_min(self, root_node: BinarySearchNode):
+    @staticmethod
+    def find_min(root_node: BinarySearchNode):
         def left_most(cur_node: BinarySearchNode | None):
             if not cur_node:
                 return None
@@ -41,7 +42,8 @@ class BinarySearchTree:
 
         return left_most(root_node)
 
-    def find_max(self, root_node: BinarySearchNode):
+    @staticmethod
+    def find_max(root_node: BinarySearchNode):
         def right_most(cur_node: BinarySearchNode | None):
             if not cur_node:
                 return None

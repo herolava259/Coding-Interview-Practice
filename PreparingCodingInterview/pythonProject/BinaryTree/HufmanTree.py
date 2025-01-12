@@ -105,16 +105,16 @@ class HuffmanTree:
         self.dfs_build('', self.root.right_node)
 
     def dfs_build(self, bit_arr: str, u: HuffmanNode):
-        bit_arr = bit_arr
+        new_bit_arr = bit_arr
         if u.bit_code:
-            bit_arr += '1'
+            new_bit_arr += '1'
         else:
-            bit_arr += '0'
+            new_bit_arr += '0'
         if u.is_leaf:
             self.map_word[u.cnt] = bit_arr
             return
-        self.dfs_build(bit_arr, u.left_node)
-        self.dfs_build(bit_arr, u.right_node)
+        self.dfs_build(new_bit_arr, u.left_node)
+        self.dfs_build(new_bit_arr, u.right_node)
 
     def encode(self, p: str) -> str:
 
