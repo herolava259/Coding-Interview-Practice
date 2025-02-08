@@ -37,7 +37,7 @@ class CountNumLengthKPathSolution:
                 len_k_child[-1][new_depth] += 1
                 length_to_root(vid, uid, new_depth)
             return
-        def convolution(arr: List[int]) -> int:
+        def self_convolution(arr: List[int]) -> int:
             len_arr = len(arr)
             return sum(arr[i] * arr[len_arr-i] for i in range(len_arr))
 
@@ -50,7 +50,9 @@ class CountNumLengthKPathSolution:
         col_total = [sum(map(lambda arr: arr[i], len_k_child)) for i in range(1, self.k+1)]
         k_total = col_total.pop()
         col_total.pop(0)
-        return (convolution(col_total) - sum(convolution(len_k_child[i]) for i in range(len(len_k_child)))
+        return (self_convolution(col_total) - sum(self_convolution(len_k_child[i]) for i in range(len(len_k_child)
+                                                                                        )
+                                             )
                 + k_total)
     def solve(self, u: int = 1) -> int:
         self.count_child(u)
