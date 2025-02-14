@@ -46,7 +46,7 @@ class CountAnagramsSolution:
 
             result = factorial_modk(n_word)
             freq = Counter(word)
-            inverse_modk = lambda c: gcd_extended(modk, c)
+            inverse_modk = lambda x: gcd_extended(modk, x)
             for c in freq.keys():
                 if freq[c] == 1:
                     continue

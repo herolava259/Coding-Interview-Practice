@@ -33,15 +33,15 @@ class LampiceSolution:
         return self.child[u]
 
 
-    def dfs_check_max_len(self, uid: int, pid: int, h: int, hshdown: int, hshup: int) -> bool:
+    def dfs_check_max_len(self, uid: int, pid: int, h: int, hsh_down: int, hsh_up: int) -> bool:
         if h > self.len:
             return False
 
         if pid != 0:
-            hshdown = (hshdown * base + ord(self.a[uid])) % modk
-        hshup = (hshup + ord(self.a[uid]) * self.pw[h-1]) % modk
+            hsh_down = (hsh_down * base + ord(self.a[uid])) % modk
+        hsh_up = (hsh_up + ord(self.a[uid]) * self.pw[h-1]) % modk
 
-        x = (hshup * self.pw[self.len-h] - hshdown + modk) % modk
+        x = (hsh_up * self.pw[self.len-h] - hsh_down + modk) % modk
 
         if not pid:
             self.f[h][x] = True
@@ -55,7 +55,7 @@ class LampiceSolution:
             if pid == 0:
                 self.b.clear()
 
-            if self.dfs_check_max_len(vid, uid, h + 1, hshdown, hshup):
+            if self.dfs_check_max_len(vid, uid, h + 1, hsh_down, hsh_up):
                 return True
 
             if not pid:
@@ -65,6 +65,7 @@ class LampiceSolution:
         self.max_depth = max(self.max_depth, h)
 
         self.b.append((h, x))
+        return False
 
     def check_palindrome(self, uid: int, n_len: int) -> bool:
 

@@ -2,7 +2,7 @@ from typing import List
 from queue import Queue
 
 
-class ElavatorTrouble:
+class ElevatorTrouble:
     def __init__(self, f: int, s: int, g: int, u: int, d: int):
         self.f: int = f
         self.s: int = s
@@ -51,7 +51,7 @@ class ElavatorTrouble:
 
 f1, s1, g1, u1, d1 = 10, 1, 10, 2, 1
 
-sln1 = ElavatorTrouble(f1, s1, g1, u1, d1)
+sln1 = ElevatorTrouble(f1, s1, g1, u1, d1)
 
 print(sln1.bfs_solve()[0])
 print(sln1.bfs_solve()[1])

@@ -8,14 +8,14 @@ class TreeNode:
         self.right_node: Optional['TreeNode'] = right_node
 
 
+def make_tree_node(val: int = 0) -> TreeNode:
+
+    return TreeNode(val)
+
 
 class BaseBinaryTree:
     def __init__(self, root: TreeNode | None = None):
         self.root: TreeNode = TreeNode(0) if root is None else root
-
-    def make_tree_node(self, val: int = 0) -> TreeNode:
-
-        return TreeNode(val)
 
     def count_node(self, cur_node: TreeNode | None) -> int:
 
