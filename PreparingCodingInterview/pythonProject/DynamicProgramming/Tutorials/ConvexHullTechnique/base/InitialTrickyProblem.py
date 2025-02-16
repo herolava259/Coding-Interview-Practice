@@ -1,6 +1,8 @@
 from typing import List, Optional, Tuple, Deque
 from collections import deque
 
+from networkx.algorithms.isomorphism.ismags import intersect
+
 """
 Given N of lines has function y = a{i} * x + b{i} and magnitude number Q of queries
 condition 0 <= i < N
@@ -51,6 +53,46 @@ class ConvexHull:
         for p in self.passages:
             self.ranges.append((p.lower_bound[0], p))
 
+    def add_increasing_line(self, a: float | int, b: int | float):
+
+        st = self.passages
+        a, b = float(a), float(b)
+        p_line, pp_line = st.pop(), st.pop()
+        self.ranges.pop()
+
+        if p_line.a == a:
+            p_line.b = min(p_line.b, b)
+            intersect = p_line.intersect_with(pp_line)
+            pp_line.upper_bound = intersect
+            p_line.lower_bound = intersect
+            self.ranges.append((intersect[0], p_line))
+            self.passages.append(pp_line)
+            self.passages.append(p_line)
+            return
+
+        def retain_line_b(line_a: Passage, line_b: Passage, line_c: Passage) -> bool:
+            x_ca, _ = line_c.intersect_with(line_a)
+            x_cb, _ = line_c.intersect_with(line_b)
+            return x_cb < x_ca
+
+        new_line = Passage(a, b)
+
+        if retain_line_b(pp_line, p_line, new_line):
+            intersect = new_line.intersect_with(p_line)
+            p_line.upper_bound = intersect
+            new_line.lower_bound = intersect
+            self.passages.extend([pp_line, p_line, new_line])
+            self.ranges.extend([(p_line.lower_bound[0], p_line), (new_line.lower_bound[0], new_line)])
+            self.n+=1
+            return
+
+        intersect = new_line.intersect_with(pp_line)
+        pp_line.upper_bound = intersect
+        new_line.upper_bound = intersect
+        self.passages.extend([pp_line, new_line])
+        self.ranges.append((new_line.lower_bound[0], new_line))
+
+
     def search_range_in(self, x: float) -> Passage:
 
         low, high = 0, len(self.passages) - 1
@@ -64,6 +106,8 @@ class ConvexHull:
             else:
                 low = mid
         return self.passages[low]
+
+
 
 def build_convex_hull_from(lines: List[Line]) -> List[Passage]:
 
