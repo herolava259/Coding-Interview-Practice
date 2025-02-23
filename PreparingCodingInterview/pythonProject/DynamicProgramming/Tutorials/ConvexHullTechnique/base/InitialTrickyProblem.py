@@ -1,8 +1,6 @@
 from typing import List, Optional, Tuple, Deque
 from collections import deque
 
-from networkx.algorithms.isomorphism.ismags import intersect
-
 """
 Given N of lines has function y = a{i} * x + b{i} and magnitude number Q of queries
 condition 0 <= i < N
