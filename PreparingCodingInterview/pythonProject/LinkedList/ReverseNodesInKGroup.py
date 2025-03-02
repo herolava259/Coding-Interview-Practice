@@ -48,20 +48,20 @@ def reverse(cur_node: Optional[ListNode], k,num_step = 0) -> Optional[ListNode]:
 test1 = [1,2,3,4,5]
 
 root = ListNode(test1[0])
-cur_p = root
+cur_pp = root
 for e in test1[1:]:
     new_node = ListNode(e)
 
 
-    cur_p.next = new_node
-    cur_p = new_node
+    cur_pp.next = new_node
+    cur_pp = new_node
 
 sln = ReverseKGroupSolution(root, 3)
 
 new_root = sln.solve()
 
-cur_p = new_root
+cur_pp = new_root
 
-while cur_p:
-    print(cur_p.val)
-    cur_p = cur_p.next
+while cur_pp:
+    print(cur_pp.val)
+    cur_pp = cur_pp.next

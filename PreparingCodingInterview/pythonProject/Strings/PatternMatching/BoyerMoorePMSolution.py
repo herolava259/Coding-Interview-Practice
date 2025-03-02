@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, DefaultDict
 import string
 from collections import defaultdict
 
@@ -11,7 +11,7 @@ class BoyerMooreSolution:
 
         self.t: List[str] = t
         self.p: List[str] = p
-        self.last: defaultdict[str] = defaultdict(lambda: -1)
+        self.last: DefaultDict[str, int] = defaultdict(lambda: -1)
         self.len_p = len(p)
         self.len_t = len(t)
 
