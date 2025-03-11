@@ -27,18 +27,18 @@ class SeqPartSolution:
             results: List[int] = [0] * len(arr)
 
             results[0] = arr[0]
-            for i in range(1, len(arr)):
-                results[i] = results[i-1] + arr[i]
+            for idx in range(1, len(arr)):
+                results[i] = results[idx-1] + arr[idx]
 
             return results
 
 
         sums: List[int] = aggregate_total(self.nums)
 
-        def cost(i, j) -> int:
-            if i > j or i <= 0:
+        def cost(idx, jdx) -> int:
+            if idx > jdx or i <= 0:
                 return 0
-            return (sums[j] - sums[i-1]) * (j-i+1)
+            return (sums[jdx] - sums[idx-1]) * (jdx-idx+1)
 
         dp: List[List[int]] = [[0] * (self.l+1) for _ in range(self.g)]
         p: List[List[int]] = [[0] * (self.l+1) for _ in range(self.g)]
@@ -52,13 +52,13 @@ class SeqPartSolution:
 
             dp[g][mid] = 10**9 +7
 
-            for i in range(bound_l, bound_r+1):
+            for idx in range(bound_l, bound_r+1):
 
-                new_cost = dp[g-1][i] + cost(i+1, mid)
+                new_cost = dp[g-1][idx] + cost(idx+1, mid)
 
                 if dp[g][mid] > new_cost:
                     dp[g][mid] = new_cost
-                    p[g][mid] = i
+                    p[g][mid] = idx
 
             calc(g, l, mid-1, bound_l, p[g][mid])
             calc(g, mid+1, r, p[g][mid], bound_r)
@@ -67,6 +67,9 @@ class SeqPartSolution:
             dp[1][i] = cost(1, i)
 
         for i in range(2, self.g+1):
-            calc(g, 1, self.l, 1, self.l)
+            calc(self.g, 1, self.l, 1, self.l)
+
+        return dp[-1][-1]
+
         
 
