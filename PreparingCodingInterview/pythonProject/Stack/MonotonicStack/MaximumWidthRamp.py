@@ -55,11 +55,6 @@ class MaximumWidthRampSolution:
             right_p -= 1
         return max_width
 
-
-
-
-
-
 sln = MaximumWidthRampSolution([6,0,8,2,1,5])
 
 print(sln.solve())
