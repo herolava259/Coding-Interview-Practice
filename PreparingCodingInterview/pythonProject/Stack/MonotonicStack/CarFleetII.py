@@ -6,7 +6,7 @@ class MinHeap:
 
         self.capacity = capacity
         self.size = 0
-        self._heap: List[Tuple[float, int]] = [(-1, -1)]
+        self._heap: List[Tuple[float, int]] = [(-1.0, -1)]
 
     def _swap(self, p1: int, p2: int):
         self._heap[p1], self._heap[p2] = self._heap[p2], self._heap[p1]
@@ -63,13 +63,13 @@ class MinHeap:
             left_p = cur_p << 1
             right_p = min(self.size, left_p + 1)
 
-            arg_max_p = self.arg_min(cur_p, left_p, right_p)
+            arg_min_p = self.arg_min(cur_p, left_p, right_p)
 
-            if arg_max_p == cur_p:
+            if arg_min_p == cur_p:
                 break
 
-            self._swap(cur_p, arg_max_p)
-            cur_p = arg_max_p
+            self._swap(cur_p, arg_min_p)
+            cur_p = arg_min_p
 
 
         return pop_pair
