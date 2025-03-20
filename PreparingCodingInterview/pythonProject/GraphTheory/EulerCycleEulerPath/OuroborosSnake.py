@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, DefaultDict
 from collections import defaultdict
 
 
@@ -38,7 +38,7 @@ def next_sequence(seq: str) -> str:
 class BuildingBinaryDeBruijnGraph:
     def __init__(self, n):
         self.n = n
-        self.edges: defaultdict[list] = defaultdict(list)
+        self.edges: DefaultDict[str, List[DeBruijnEdge]] = defaultdict(list)
         self.nodes: dict = dict()
 
     def build(self):

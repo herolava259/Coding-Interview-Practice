@@ -7,10 +7,10 @@ class Edge:
 
 
 class HierholzerSolution:
-    def __init__(self, g: List[Edge], num_edge):
+    def __init__(self, g: List[List[Edge]], num_edge):
         self.num_node = len(g)
         self.num_edge = num_edge
-        self.g: List[Edge] = g
+        self.g: List[List[Edge]] = g
         self.used_edge = [False for _ in range(self.num_edge + 1)]
         self.removed_node = [False for _ in range(self.num_node + 1)]
     def euler_walk(self, u: int) -> List[int]:
