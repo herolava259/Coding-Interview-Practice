@@ -19,7 +19,7 @@ class NetworkDelayTimeSolution:
 
         adj: List[List[Tuple[int, int]]] = [[] for _ in range(self.n+1)]
 
-        pq: List[List[int, int]] = []
+        pq: List[Tuple[int, int]] = []
 
         num_visited = 0
 

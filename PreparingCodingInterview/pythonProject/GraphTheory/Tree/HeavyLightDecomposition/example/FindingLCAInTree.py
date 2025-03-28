@@ -13,7 +13,6 @@ class FindingLCASolution:
         hld: HLD = (HLDBuilder().add_root(self.root)
                                     .add_tree(self.tree)
                                     .init_spec()
-                                    .init_spec()
                                     .build())
         head_chain_of = lambda nid: hld.par[hld.chain_head[hld.chain_id[nid]]]
 
@@ -41,7 +40,7 @@ class QueryLCAResolver:
 
     def query(self, u: int, v: int) -> int:
 
-        head_chain_of = lambda nid: hld.par[hld.chain_head[hld.chain_id[nid]]]
+        head_chain_of = lambda nid: self.hld.par[self.hld.chain_head[self.hld.chain_id[nid]]]
 
         while self.hld.chain_id[u] != self.hld.chain_id[v]:
             if self.hld.chain_id[u] > self.hld.chain_id[v]:
