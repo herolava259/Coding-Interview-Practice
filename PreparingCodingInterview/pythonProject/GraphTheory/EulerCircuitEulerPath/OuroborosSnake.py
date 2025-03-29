@@ -15,10 +15,10 @@ class DeBruijnNode:
 
 
 class DeBruijnEdge:
-    def __init__(self, u: DeBruijnNode, v: DeBruijnNode, eid: int):
+    def __init__(self, u: DeBruijnNode | None, v: DeBruijnNode | None, eid: int):
         self.u: DeBruijnNode = u
         self.v: DeBruijnNode = v
-        self.sequence: str = self.u.sequence + self.v[-1]
+        self.sequence: str = self.u.sequence + self.v.sequence
         self.eid = eid
 
 
