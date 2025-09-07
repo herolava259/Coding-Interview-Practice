@@ -11,24 +11,24 @@ class MedianOfTSA:
         len_arr1, len_arr2 = len(self.arr1), len(self.arr2)
 
         if len_arr1 == 0:
-            mid = len_arr2 // 2
-            if len_arr2 % 2 == 0:
+            mid = len_arr2 >> 1
+            if len_arr2 & 1 == 0:
                 return (self.arr2[mid] + self.arr2[mid - 1]) / 2
             return float(self.arr2[mid])
 
         if len_arr2 == 0:
-            mid = len_arr1 // 2
-            if len_arr1 % 2 == 0:
+            mid = len_arr1 >> 1
+            if len_arr1 & 1 == 0:
                 return (self.arr1[mid] + self.arr1[mid - 1]) / 2
             return float(self.arr1[mid])
 
-        if (len_arr1 + len_arr2) % 2 == 1:
+        if (len_arr1 + len_arr2) & 1 == 1:
             return float(search_median(self.arr1, self.arr2, 0, len_arr1-1, 0, len_arr2-1, (len_arr1 + len_arr2) // 2))
 
         med_low = search_median(self.arr1, self.arr2, 0, len_arr1-1, 0, len_arr2-1, (len_arr1 + len_arr2)//2 -1)
         med_high = search_median(self.arr1, self.arr2, 0, len_arr1-1, 0, len_arr2-1, (len_arr1 + len_arr2)//2)
 
-        return (med_low + med_high) / 2
+        return (med_low + med_high) >> 1
 
 
 def search_median(arr1: List[int], arr2: List[int], l1: int, h1: int, l2: int, h2: int, k: int) -> int:
@@ -48,8 +48,8 @@ def search_median(arr1: List[int], arr2: List[int], l1: int, h1: int, l2: int, h
             return arr1[k-l2]
         return max(arr1[k - l2 - 1], arr2[h2])
 
-    mid1 = ((h1 + l1) // 2)
-    mid2 = ((h2 + l2) // 2)
+    mid1 = (h1 + l1) >> 1
+    mid2 = (h2 + l2) >> 1
 
     if arr1[mid1] == arr2[mid2]:
         if k == (mid1 + mid2 + 1):
