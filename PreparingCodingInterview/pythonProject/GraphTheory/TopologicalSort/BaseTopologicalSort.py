@@ -21,8 +21,6 @@ class TopologicalSortSolution:
 
     def solve(self) -> List[int]:
 
-        in_degs = list(self.in_degrees)
-
         q: deque = deque(self.find_in_zero_nodes())
 
         orders: List[int] = []
@@ -52,7 +50,7 @@ class TopologicalBaseOnDFSSolution:
 
         self.n = len(g)
         self.g: List[List[int]] = g
-        self.states: List[int] = [0 for i in range(self.n + 1)]
+        self.states: List[int] = [0] * (self.n+1)
         self.orders: List[int] = []
 
     def dfs_solve(self, u: int, p: int = -1) -> bool:
