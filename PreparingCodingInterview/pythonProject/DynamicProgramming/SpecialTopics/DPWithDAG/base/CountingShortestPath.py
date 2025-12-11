@@ -1,4 +1,13 @@
-from typing import List, Tuple
+from typing import List, Tuple, Dict
+
+
+class ShortestPathInGraphResolver(object):
+    def __init__(self, weighted_graph: List[List[Tuple[int, int]]]):
+        self.wg = weighted_graph
+
+
+    def __call__(self) -> Dict[int, int]:
+        pass
 
 
 class CountingShortestPathSolution:
@@ -11,6 +20,5 @@ class CountingShortestPathSolution:
         dp = [0] * len(g)
 
         #TODO: solve problem here
-
-
+        
         return dp
