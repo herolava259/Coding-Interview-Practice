@@ -6,3 +6,13 @@ public interface ISolution<out TResult>
 
     TResult Solve();
 }
+
+
+public abstract class AbstractSolution<TResult> : ISolution<TResult>
+{
+    public abstract void Initialize();
+    public abstract TResult Solve();
+
+
+
+}
