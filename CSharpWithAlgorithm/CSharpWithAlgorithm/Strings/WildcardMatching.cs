@@ -65,9 +65,13 @@ public sealed class WildcardMatching : ISolution<bool>
 
         Func<int, int, int> IndexOf = (i, j) => i * (p.Length + 1) + j;
 
-        Func<bool[], int, bool[]> Row = (arr, rowIdx) => arr[(rowIdx * (p.Length+1))..((rowIdx+1) * (p.Length+1))];
+        Func<bool[], int, bool[]> Row = (arr, rowIdx) => arr[IndexOf(rowIdx,0)..IndexOf(rowIdx+1,0)];
+        Func<bool[], int, bool[]> Col = (arr, colIdx) => arr.Zip(Enumerable.Range(0, arr.Length))
+                                                            .Where(pair => (pair.Second % arr.Length) == colIdx)
+                                                            .Select(pair => pair.First)
+                                                            .ToArray();
 
-        Array.Fill(dp, false);
+        //Array.Fill(dp, false);
 
         dp[IndexOf(0, 0)] = true;
 
