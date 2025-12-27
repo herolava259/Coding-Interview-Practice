@@ -60,7 +60,7 @@ public sealed class WildcardMatching : ISolution<bool>
         var p = pattern;
 
 
-        var dp = new bool[(s.Length+1)*(p.Length+1)];
+        Span<bool> dp = stackalloc bool[(s.Length+1)*(p.Length+1)];
 
 
         Func<int, int, int> IndexOf = (i, j) => i * (p.Length + 1) + j;
