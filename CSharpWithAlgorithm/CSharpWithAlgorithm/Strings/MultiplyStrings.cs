@@ -27,13 +27,13 @@ public sealed class MultiplyStrings : ISolution<string>
     {
         Dictionary<int, int[]> multiplyCache = new Dictionary<int, int[]>();
 
-        Func<string, int[]> ToIntArray = s => s.Select(c => c-'0').Reverse().ToArray();
+        Func<string, int[]> ConvertIntArray = s => s.Select(c => c-'0').Reverse().ToArray();
 
-        Func<int[], int, int, bool, int[]> PaddingSide = (int[] arr, int expectedLength, int value, bool leftSide) 
+        Func<int[], int, int, bool, int[]> PadSide = (int[] arr, int expectedLength, int value, bool leftSide) 
                 => leftSide ? [..Enumerable.Repeat(value, expectedLength - arr.Length), ..arr] 
                             : [..arr, ..Enumerable.Repeat(value, expectedLength - arr.Length)];
 
-        Func<int[], int, int[]> PaddingZeroToRight = (int[] arr, int expectedLength)=> PaddingSide(arr, expectedLength,0,false);
+        Func<int[], int, int[]> PadZeroToRight = (int[] arr, int expectedLength)=> PadSide(arr, expectedLength,0,false);
 
 
         IEnumerable<int> AddExtent(int[] me, int[] you)
@@ -41,9 +41,9 @@ public sealed class MultiplyStrings : ISolution<string>
             int length = Math.Max(me.Length, you.Length);
 
             if (length > me.Length)
-                me = PaddingZeroToRight(me, length);
+                me = PadZeroToRight(me, length);
             if (length > you.Length)
-                you = PaddingZeroToRight(you, length);
+                you = PadZeroToRight(you, length);
 
             var residual = 0;
             for(int i = 0; i < length; ++i)
@@ -80,8 +80,8 @@ public sealed class MultiplyStrings : ISolution<string>
 
         var result = new int[0];
 
-        var one = ToIntArray(num1);
-        var two = ToIntArray(num2);
+        var one = ConvertIntArray(num1);
+        var two = ConvertIntArray(num2);
 
         // explain: num1 = 123, num2 = 321
         // calc: 123 * 321

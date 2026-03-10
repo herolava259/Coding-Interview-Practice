@@ -1,9 +1,5 @@
 ﻿using CSharpWithAlgorithm.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace CSharpWithAlgorithm.Strings;
 
@@ -41,7 +37,7 @@ public sealed class WildcardMatching : ISolution<bool>
             return true;
         else if (subPattern.StartsWith('*'))
         {
-            foreach (var startIdx in Enumerable.Range(0, subTxt.Length))
+            foreach (int startIdx in Enumerable.Range(0, subTxt.Length))
             {
                 if(PartialMatch(subTxt.Substring(startIdx), subPattern[1..]))
                     return true;
@@ -97,7 +93,7 @@ public sealed class WildcardMatching : ISolution<bool>
 
                 leak |= dp[IndexOf(i, j)];
             }
-
+            
             if (!leak)
                 return false;
 
