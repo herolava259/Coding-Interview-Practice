@@ -47,8 +47,6 @@ class TriangleNumberSolution:
 
                 idx = bs_search(side_i + side_j, j)
 
-                mul = 0
-
                 if side_i == side_j:
                     mul = (frequencies[side_i] * (frequencies[side_i]-1)) // 2
                 else:
@@ -89,8 +87,6 @@ class TriangleNumberSolution:
                     continue
                 if side_i == side_j and frequencies[side_i] == 1:
                     continue
-
-                mul = 0
 
                 if side_i == side_j:
                     mul = (frequencies[side_i] * (frequencies[side_i]-1)) // 2

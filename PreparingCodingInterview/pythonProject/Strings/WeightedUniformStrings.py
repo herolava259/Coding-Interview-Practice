@@ -1,9 +1,3 @@
-import math
-import os
-import re
-import random
-import re
-import sys
 from collections import defaultdict
 
 def weightedUniformStrings(s, queries):
