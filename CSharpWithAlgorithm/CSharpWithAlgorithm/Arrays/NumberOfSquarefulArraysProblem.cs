@@ -1,10 +1,11 @@
 ﻿using System.Collections.Immutable;
+using System.Linq;
 
 namespace CSharpWithAlgorithm.Arrays;
 
 public static class NumberOfSquarefulArraysProblem
 {
-    private static IEnumerable<TResult> TriangleCombine<TElement, TResult>(this IList<TElement> sequence, Func<TElement, TElement,int, int TResult> resultSelector)
+    private static IEnumerable<TResult> TriangleCombine<TElement, TResult>(this IList<TElement> sequence, Func<TElement, TElement,int, int, TResult> resultSelector)
     {
         for (int i = 0; i < sequence.Count; i++) {
             for (int j = i + 1; j < sequence.Count; j++) {
@@ -133,20 +134,6 @@ public static class NumberOfSquarefulArraysProblem
         return counter == numOfElements;
     }
 
-    static int exclusive(int bitMask, int numOfElement)
-    {
-        var result = 0;
-
-        for (int i = 0; i < numOfElement; i++) {
-
-            if ((bitMask & (1 << i)) != 0)
-                continue;
-            result |= 1 << i;
-        }
-
-        return result;
-    }
-
 
     private static IEnumerable<TResult> TriangleQuery<TElement, TResult>(this IList<TElement> sequence,
                                                                         Func<TElement, TElement, int, int, bool> filterCondition, 
@@ -159,19 +146,6 @@ public static class NumberOfSquarefulArraysProblem
                 if (filterCondition(sequence[i], sequence[j], i, j))
                     yield return resultSelector(sequence[i], sequence[j], i, j);
             }
-        }
-    }
-
-    private static void CountingMerge(this IDictionary<int, int> counter, IDictionary<int, int> other, int key)
-    {
-        foreach(var msk in other.Keys)
-        {
-            var newMsk = add(msk, key);
-
-            if (!counter.ContainsKey(newMsk))
-                counter[newMsk] = 0;
-
-            counter[newMsk] += other[msk];
         }
     }
 
@@ -224,7 +198,7 @@ public static class NumberOfSquarefulArraysProblem
         for (int i = 0; i < nums.Length; ++i) 
             dfsCounting(encode(i), i);
 
-        return result / ;
+        return result / nums.GroupBy(c => c).Select(c => c.Count()).Aggregate(1, (result, c) => result * factorial(c));
     }
 
     static bool disjointed(int bitMskOne, int bitMskTwo)
@@ -245,21 +219,18 @@ public static class NumberOfSquarefulArraysProblem
 
         var numBits = (int)Math.Ceiling(Math.Log2(n));
 
-        bool combinable(int pairOne, int pairTwo)
-            => decode(pairOne).Any(a => decode(pairTwo).Any(b => bitMskPairs.Contains(encode(a, b))));
+        bool combinable(int headPairOne, int headPairTwo)
+            => decode(headPairOne).Any(a => decode(headPairTwo).Any(b => bitMskPairs.Contains(encode(a, b))));
 
 
-        int concat(int bitPairOne, int bitPairTwo)
-        { 
+        IEnumerable<int> concat(int bitPairOne, int bitPairTwo)
+        {
+            var unionOfTwo = union(bitPairOne, bitPairTwo);
 
-            var exclusiveBitMsks = decode(bitPairOne).SelectMany(a => decode(bitPairTwo).Select(b => encode(a, b)))
-                                                    .Where(p => bitMskPairs.Contains(p))
-                                                    .SelectMany(p => decode(p))
-                                                    .Distinct()
-                                                    .ToArray()
-                                                    ;
-            return union(bitPairOne, bitPairTwo) ^ encode(exclusiveBitMsks);
-
+            foreach (var exclusivePair in decode(bitPairOne).SelectMany(a => decode(bitPairTwo).Select(b => encode(a, b)))
+                                                    .Where(p => bitMskPairs.Contains(p)))
+                yield return unionOfTwo ^ exclusivePair;
+            
         }
 
 
@@ -273,16 +244,17 @@ public static class NumberOfSquarefulArraysProblem
 
                                          acc.Add(previous.Keys.ToArray()
                                                               .TriangleQuery((i, j, ei, ej) => combinable(ei, ej),
-                                                                             (i, j, ei, ej) => new KeyValuePair<int, Dictionary<int, int>>
-                                                                                                      (key: concat(ei, ej), 
+                                                                             (i, j, ei, ej) => concat(ei, ej).Select(k => new KeyValuePair<int, Dictionary<int, int>>
+                                                                                                      (key: k,
                                                                                                       value: previous[ei].SelectMany(kvi =>
                                                                                                                             previous[ej]
                                                                                                                                 .Where(kvj => disjointed(kvi.Key, kvj.Key))
                                                                                                                                 .Select(kvj =>
                                                                                                                                     new KeyValuePair<int, int>(union(kvi.Key, kvj.Key), factor * kvi.Value * kvj.Value / 2)))
                                                                                                                          .ToDictionary()
-                                                                                                      )
+                                                                                                      ))
                                                               )
+                                                              .SelectMany(en => en)
                                                               .ToDictionary());
 
                                          return acc;
@@ -315,7 +287,8 @@ public static class NumberOfSquarefulArraysProblem
                 foreach(var kvj in kvi.Value.Where(kvc => disjointed(msk, kvc.Key)))
                 {
                     combination.Add(kvj.Value);
-                    combine(k + 1, combination, concat(kvi.Key, headPair), union(msk, kvj.Key));
+                    foreach(var pair in concat(kvi.Key, headPair))
+                        combine(k + 1, combination, pair, union(msk, kvj.Key));
                     combination.RemoveAt(combination.Count - 1);
                 }
             }
