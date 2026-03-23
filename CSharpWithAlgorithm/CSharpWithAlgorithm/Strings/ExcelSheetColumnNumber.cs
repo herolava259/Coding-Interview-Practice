@@ -14,7 +14,7 @@ public static class ExcelSheetColumnNumber
 
         var factor = 1;
 
-        foreach(var c in columnTitle.Reverse())
+        foreach (var c in columnTitle.Reverse())
         {
             columnNumber += (c - 'A' + 1) * factor;
             factor *= 26;

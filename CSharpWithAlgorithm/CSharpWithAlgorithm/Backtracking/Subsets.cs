@@ -22,7 +22,7 @@ public class Subsets : ISolution<IList<IList<int>>>
 
     public IList<IList<int>> Solve()
     {
-        for(int i = 0; i < nums.Length; ++i)
+        for (int i = 0; i < nums.Length; ++i)
         {
             Backtrack(new List<int>(), i);
         }
@@ -32,16 +32,16 @@ public class Subsets : ISolution<IList<IList<int>>>
 
     private void Backtrack(IList<int> sln, int k = 0)
     {
-        if(k == nums.Length)
+        if (k == nums.Length)
         {
             results.Add(sln!.ToList());
             return;
         }
         sln.Add(nums[k]);
-        for(int i = k +1 ; i <= nums.Length; ++i)
+        for (int i = k + 1; i <= nums.Length; ++i)
         {
             Backtrack(sln!, i);
-            
+
         }
         sln.RemoveAt(sln.Count - 1);
     }

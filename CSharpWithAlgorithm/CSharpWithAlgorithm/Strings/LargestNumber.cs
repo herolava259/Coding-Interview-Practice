@@ -13,7 +13,7 @@ public static class LargestNumberSolution
 
             var lengthOfLoop = a.Length - (a.Length % b.Length);
 
-            for (int i =0; i < lengthOfLoop; ++i)
+            for (int i = 0; i < lengthOfLoop; ++i)
             {
                 if (a[i] > b[i % b.Length])
                     return 1;
@@ -25,7 +25,7 @@ public static class LargestNumberSolution
                 return 0;
 
 
-            return -CompareRecursive(b, a.Substring(b.Length*(a.Length / b.Length)));
+            return -CompareRecursive(b, a.Substring(b.Length * (a.Length / b.Length)));
         }
         public int Compare(string? x, string? y)
         {
@@ -47,7 +47,7 @@ public static class LargestNumberSolution
 
         if (nums.Length == 0)
             return "0";
-        
+
         var numStrs = nums.Select(c => c.ToString()).ToArray();
 
         Array.Sort(numStrs, new ComparasionRule());

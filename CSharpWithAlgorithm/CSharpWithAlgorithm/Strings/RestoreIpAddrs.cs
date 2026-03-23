@@ -16,7 +16,7 @@ public class RestoreIpAddrs
             return true;
         else if (chain.StartsWith('0'))
             return false;
-        if(!(int.TryParse(chain, out var num) && num >= 0 && num < 256))
+        if (!(int.TryParse(chain, out var num) && num >= 0 && num < 256))
             return false;
         return true;
 
@@ -37,7 +37,7 @@ public class RestoreIpAddrs
             else if (parts.Count == 4)
                 return;
 
-            for(int i = 1; i <= 3; ++i)
+            for (int i = 1; i <= 3; ++i)
             {
                 if (begin + i > s.Length)
                     break;

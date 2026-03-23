@@ -51,7 +51,7 @@ public static class FractionToRecurringDecimalProblem
             numOfCharacter++;
         }
 
-        return new Residual { Decimal = (expo-1) * bigNume / bigDenom, ActualLength = numOfCharacter};
+        return new Residual { Decimal = (expo - 1) * bigNume / bigDenom, ActualLength = numOfCharacter };
     }
 
     public static (int, int, int) ExtractTwoAndFiveFactor(int num)
@@ -66,7 +66,7 @@ public static class FractionToRecurringDecimalProblem
 
         }
 
-        while(num > 0 && num % 5 == 0)
+        while (num > 0 && num % 5 == 0)
         {
             num /= 5;
             fiveCounter++;
@@ -78,11 +78,11 @@ public static class FractionToRecurringDecimalProblem
     public static string RecurringFractionalDivide(int nume, int denom)
     {
         var sb = new StringBuilder();
-        
+
         var signNum = Math.Sign(nume);
         var signDen = Math.Sign(denom);
 
-        if(signNum != 0 && signNum != signDen)
+        if (signNum != 0 && signNum != signDen)
         {
             sb.Append('-');
         }
@@ -100,7 +100,7 @@ public static class FractionToRecurringDecimalProblem
 
         var (numTwoFactor, numFiveFactor, newDenom) = ExtractTwoAndFiveFactor(denom);
 
-        var leadingZero =  Math.Max(numTwoFactor, numFiveFactor);
+        var leadingZero = Math.Max(numTwoFactor, numFiveFactor);
 
         var newNume = nume * (int)Math.Pow(2, Math.Max(0, numFiveFactor - numTwoFactor)) * (int)Math.Pow(5, Math.Max(0, numTwoFactor - numFiveFactor));
 
@@ -121,12 +121,13 @@ public static class FractionToRecurringDecimalProblem
           .Append(')');
 
         return sb.ToString();
-        
+
     }
 
     public sealed record CustomDecimal(bool Sign, UInt128 IntergerPart, UInt128 DecimalPart, int LeadingZero, bool HasRecurringFractional = false)
     {
-        public string AsString{
+        public string AsString
+        {
             get
             {
                 return (Sign ? "" : "-") + $"{IntergerPart}.{new string('0', LeadingZero)}" + (HasRecurringFractional ? $"({DecimalPart})" : DecimalPart.ToString());
@@ -150,7 +151,8 @@ public static class FractionToRecurringDecimalProblem
                 result *= factor;
             return result;
         }
-        bool determineSignOfResult(int nume, int denom) {
+        bool determineSignOfResult(int nume, int denom)
+        {
             if (nume == 0) return true;
 
             return Math.Sign(nume) == Math.Sign(denom);
@@ -161,7 +163,7 @@ public static class FractionToRecurringDecimalProblem
                 return 0;
             var result = 0;
 
-            while(num % factor == 0)
+            while (num % factor == 0)
             {
                 result++;
                 num /= factor;
@@ -177,7 +179,7 @@ public static class FractionToRecurringDecimalProblem
 
         var intergerPart = bigUNume / bigUDenom;
 
-        if(intergerPart > 0)
+        if (intergerPart > 0)
             bigUNume = bigUNume % bigUDenom;
 
         var numeFactorTwo = countFactorOf(bigUNume, 2);
@@ -194,7 +196,7 @@ public static class FractionToRecurringDecimalProblem
         var complementFactorTwo = 0;
         var complementFactorFive = 0;
 
-        if(reducedFactorTwo < 0)
+        if (reducedFactorTwo < 0)
         {
             remainPart *= BigPow(2, -reducedFactorTwo);
             reducedFactorTwo = 0;
@@ -206,7 +208,7 @@ public static class FractionToRecurringDecimalProblem
             reducedFactorFive = 0;
         }
 
-        if(reducedFactorTwo > reducedFactorFive)
+        if (reducedFactorTwo > reducedFactorFive)
         {
             complementFactorFive = reducedFactorTwo - reducedFactorFive;
         }
@@ -217,7 +219,7 @@ public static class FractionToRecurringDecimalProblem
 
         remainPart *= BigPow(2, complementFactorTwo) * BigPow(5, complementFactorFive);
 
-        var actualFractionalLength = Math.Max(reducedFactorTwo + complementFactorTwo, reducedFactorFive + complementFactorFive) ;
+        var actualFractionalLength = Math.Max(reducedFactorTwo + complementFactorTwo, reducedFactorFive + complementFactorFive);
 
         return new CustomDecimal(signOfResult, intergerPart, remainPart, Math.Max(0, actualFractionalLength - remainPart.ToString().Length));
     }
@@ -225,10 +227,10 @@ public static class FractionToRecurringDecimalProblem
 
     public static string FractionToDecimal(int numerator, int denominator)
     {
-        if(numerator == 0)
+        if (numerator == 0)
             return "0";
 
-        if (Math.Abs((long)numerator) >= Math.Abs((long)denominator) 
+        if (Math.Abs((long)numerator) >= Math.Abs((long)denominator)
             && (Math.Abs((long)numerator) % Math.Abs((long)denominator) == 0))
             return (numerator / denominator).ToString();
         if (OnlyDivisibleTwoOrFive(denominator))

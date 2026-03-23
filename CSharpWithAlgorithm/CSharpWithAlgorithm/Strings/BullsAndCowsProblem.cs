@@ -4,7 +4,7 @@ public static class BullsAndCowsProblem
 {
     private static int GetOrInit(this Dictionary<char, int> counter, char key, int defaultValue = 0)
     {
-        if(counter.ContainsKey(key))
+        if (counter.ContainsKey(key))
         {
             return counter[key];
         }
@@ -29,7 +29,7 @@ public static class BullsAndCowsProblem
 
         var wrongGuessCounter = new Dictionary<char, int>();
 
-        foreach(var (cg, cs) in guess.Zip(secret))
+        foreach (var (cg, cs) in guess.Zip(secret))
         {
             if (cg == cs)
             {

@@ -7,18 +7,18 @@ public static class PermutationsIIProblem
     private static IList<IList<int>> BruteForceSolve(int[] nums)
     {
         var candidateTable = new Dictionary<string, IList<int>>();
-        
+
         void backtrack(IList<int> candidate, IList<int> source)
         {
-            if(source.Count == 0)
+            if (source.Count == 0)
             {
-                candidateTable[string.Join("",candidate)] = candidate.ToList();
+                candidateTable[string.Join("", candidate)] = candidate.ToList();
                 return;
             }
 
             int numSource = source.Count;
 
-            for(int i = 0; i < numSource; ++i)
+            for (int i = 0; i < numSource; ++i)
             {
                 var nextValue = source[i];
                 source.RemoveAt(i);
@@ -42,7 +42,7 @@ public static class PermutationsIIProblem
         {
             long result = num;
 
-            while(--num > 0) result *= num;
+            while (--num > 0) result *= num;
 
             return result;
         }
@@ -59,12 +59,12 @@ public static class PermutationsIIProblem
 
             var pointer = begin;
 
-            while(pointer <= end && sequence[pointer] > val) pointer++;
+            while (pointer <= end && sequence[pointer] > val) pointer++;
 
             return Math.Max(pointer - 1, begin);
         }
 
-            
+
 
         int lowerBoundPositionOfNonIncreaseSubSequence(IList<int> sequence)
         {
@@ -73,7 +73,7 @@ public static class PermutationsIIProblem
             while (pointer > 0 && sequence[pointer - 1] >= sequence[pointer])
                 --pointer;
 
-            return pointer-1;
+            return pointer - 1;
         }
 
         void swap(IList<int> sequence, int positionOne, int positionTwo)
@@ -96,11 +96,11 @@ public static class PermutationsIIProblem
             // begin <= end
             // begin >= 0
             // end < len-of-sequence
-            if(end == -1) 
+            if (end == -1)
                 end = sequence.Count - 1;
-            
-            while(begin < end) swap(sequence, begin++, end--);
-            
+
+            while (begin < end) swap(sequence, begin++, end--);
+
         }
 
         IList<int> nextPermutation(IList<int> sequence)
@@ -120,7 +120,7 @@ public static class PermutationsIIProblem
 
         var result = new List<IList<int>>() { curSeq };
 
-        for(int i =2; i <= numOfLoop; ++i)
+        for (int i = 2; i <= numOfLoop; ++i)
         {
             curSeq = nextPermutation(curSeq);
             result.Add(curSeq);

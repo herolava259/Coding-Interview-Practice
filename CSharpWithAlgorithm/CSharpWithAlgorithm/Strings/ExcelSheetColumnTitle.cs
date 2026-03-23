@@ -8,7 +8,8 @@ public class ExcelSheetColumnTitle
     {
         var sb = new StringBuilder();
         columnNumber--;
-        while (columnNumber > 0) { 
+        while (columnNumber > 0)
+        {
             sb.Append((char)((columnNumber % 26) + 'A'));
             columnNumber /= 26;
             columnNumber--;

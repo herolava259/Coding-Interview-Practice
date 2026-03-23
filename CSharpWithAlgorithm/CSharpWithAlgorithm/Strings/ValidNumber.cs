@@ -24,18 +24,18 @@ public sealed class ValidNumber : ISolution<bool>
     private class CharacterRuleSchema
     {
         private List<char> _spaces = new();
-        
+
         private IDictionary<char, CharacterEntry> _entryMap = new Dictionary<char, CharacterEntry>();
 
-        public IEnumerable<CharacterEntry> AllEntries 
+        public IEnumerable<CharacterEntry> AllEntries
             => _entryMap.Values;
 
         public bool HasCharacter(char c)
-            { return _spaces.Contains(c); }
+        { return _spaces.Contains(c); }
 
         public CharacterEntry WithEntryOf(char c)
         {
-            if(_entryMap.TryGetValue(c, out var entry))
+            if (_entryMap.TryGetValue(c, out var entry))
                 return entry;
             _entryMap[c] = new CharacterEntry { Character = c };
 
@@ -66,7 +66,7 @@ public sealed class ValidNumber : ISolution<bool>
             if (!entryKeys.ToHashSet().IsSubsetOf(_spaces.ToHashSet()))
                 throw new ArgumentException("Invalid entryKeys", nameof(entryKeys));
 
-            foreach(var entryKey in entryKeys)
+            foreach (var entryKey in entryKeys)
                 ConfigRule(entryKey, configureFunc);
 
             return this;
@@ -80,7 +80,7 @@ public sealed class ValidNumber : ISolution<bool>
 
         public CharacterRuleSchema()
         {
-            
+
         }
     }
 
@@ -102,9 +102,9 @@ public sealed class ValidNumber : ISolution<bool>
 
             bool result = context.LoopUntil(c =>
             {
-                foreach(var entry in this.schema.AllEntries)
+                foreach (var entry in this.schema.AllEntries)
                 {
-                    if(!entry.TemporaryCheck(c)) return false;
+                    if (!entry.TemporaryCheck(c)) return false;
                 }
 
                 return true;
@@ -160,7 +160,7 @@ public sealed class ValidNumber : ISolution<bool>
         public void LoopOver(Action<CharacterSequenceContext> action)
         {
             Reset();
-            while(this.HasNext)
+            while (this.HasNext)
             {
                 action(this);
                 StepNext();
@@ -199,7 +199,7 @@ public sealed class ValidNumber : ISolution<bool>
         public ExistRule(CharacterEntry entry)
         {
             Entry = entry;
-            
+
         }
 
         public override bool IsValid => _isExist;
@@ -254,7 +254,7 @@ public sealed class ValidNumber : ISolution<bool>
         private int _position = -1;
         private bool _isValid = false;
 
-        
+
 
         public AppearAtPositionRule(CharacterEntry entry, int position)
         {
@@ -277,11 +277,11 @@ public sealed class ValidNumber : ISolution<bool>
 
     private class FrequencyRule : CharacterRule
     {
-        
+
         private readonly ComparisonOperator comparisonOperator;
         private readonly int frequency;
         private int _counter = 0;
-        public enum ComparisonOperator: ushort
+        public enum ComparisonOperator : ushort
         {
             LessThan = 0,
             LessThanOrEqual = 1,
@@ -347,7 +347,7 @@ public sealed class ValidNumber : ISolution<bool>
 
         public ExpressionRule(CharacterEntry entry,
                               Predicate<TState> howIsValid,
-                              Action<CharacterSequenceContext, TState>? onIvokingCalling = null, 
+                              Action<CharacterSequenceContext, TState>? onIvokingCalling = null,
                               Action<int, TState>? onMatchingCharacterCalling = null,
                               bool shouldInvokeMatchingCallerFirst = false)
         {
@@ -363,12 +363,12 @@ public sealed class ValidNumber : ISolution<bool>
 
         public override void Invoke(CharacterSequenceContext context)
         {
-            if(shouldCallMatchingCallFirst && context.CurrentCharacter == Entry.Character)
+            if (shouldCallMatchingCallFirst && context.CurrentCharacter == Entry.Character)
             {
                 OnMatchingCharacterCalling(context.CurrentPosition, this.State);
                 OnIvokingCalling(context, this.State);
             }
-            else if(context.CurrentCharacter == Entry.Character)
+            else if (context.CurrentCharacter == Entry.Character)
             {
                 OnIvokingCalling(context, this.State);
                 OnMatchingCharacterCalling(context.CurrentPosition, State);
@@ -376,7 +376,7 @@ public sealed class ValidNumber : ISolution<bool>
             else OnIvokingCalling(context, this.State);
         }
 
-        
+
     }
 
     private partial class CharacterEntry
@@ -410,7 +410,7 @@ public sealed class ValidNumber : ISolution<bool>
 
         public void DropRule(string ruleName)
         {
-            if(RuleMap.ContainsKey(ruleName))
+            if (RuleMap.ContainsKey(ruleName))
                 RuleMap.Remove(ruleName);
         }
 

@@ -27,13 +27,13 @@ public sealed class MultiplyStrings : ISolution<string>
     {
         Dictionary<int, int[]> multiplyCache = new Dictionary<int, int[]>();
 
-        Func<string, int[]> ConvertIntArray = s => s.Select(c => c-'0').Reverse().ToArray();
+        Func<string, int[]> ConvertIntArray = s => s.Select(c => c - '0').Reverse().ToArray();
 
-        Func<int[], int, int, bool, int[]> PadSide = (int[] arr, int expectedLength, int value, bool leftSide) 
-                => leftSide ? [..Enumerable.Repeat(value, expectedLength - arr.Length), ..arr] 
-                            : [..arr, ..Enumerable.Repeat(value, expectedLength - arr.Length)];
+        Func<int[], int, int, bool, int[]> PadSide = (int[] arr, int expectedLength, int value, bool leftSide)
+                => leftSide ? [.. Enumerable.Repeat(value, expectedLength - arr.Length), .. arr]
+                            : [.. arr, .. Enumerable.Repeat(value, expectedLength - arr.Length)];
 
-        Func<int[], int, int[]> PadZeroToRight = (int[] arr, int expectedLength)=> PadSide(arr, expectedLength,0,false);
+        Func<int[], int, int[]> PadZeroToRight = (int[] arr, int expectedLength) => PadSide(arr, expectedLength, 0, false);
 
 
         IEnumerable<int> AddExtent(int[] me, int[] you)
@@ -46,7 +46,7 @@ public sealed class MultiplyStrings : ISolution<string>
                 you = PadZeroToRight(you, length);
 
             var residual = 0;
-            for(int i = 0; i < length; ++i)
+            for (int i = 0; i < length; ++i)
             {
                 var total = me[i] + you[i] + residual;
                 yield return total % 10;
@@ -54,7 +54,7 @@ public sealed class MultiplyStrings : ISolution<string>
                 residual = total / 10;
             }
 
-            if(residual > 0)
+            if (residual > 0)
             {
                 yield return residual;
             }
@@ -63,7 +63,7 @@ public sealed class MultiplyStrings : ISolution<string>
         IEnumerable<int> AtomicMultiply(int[] arr, int num)
         {
             int residual = 0;
-            for(int i =0; i < arr.Length; ++i)
+            for (int i = 0; i < arr.Length; ++i)
             {
                 var prod = arr[i] * num + residual;
 
@@ -72,7 +72,7 @@ public sealed class MultiplyStrings : ISolution<string>
                 residual = prod / 10;
             }
 
-            if(residual > 0)
+            if (residual > 0)
                 yield return residual;
         }
 
@@ -86,7 +86,7 @@ public sealed class MultiplyStrings : ISolution<string>
         // explain: num1 = 123, num2 = 321
         // calc: 123 * 321
 
-        for(int i = 0; i < two.Length; i++)
+        for (int i = 0; i < two.Length; i++)
         {
             // step i: take num1 multiply with element of num2
             // ex:Step 0: 123 * 1
@@ -96,7 +96,7 @@ public sealed class MultiplyStrings : ISolution<string>
 
 
             // computation cache
-            if(!multiplyCache.ContainsKey(factor))
+            if (!multiplyCache.ContainsKey(factor))
             {
                 multiplyCache[factor] = AtomicMultiply(one, factor).ToArray();
             }
@@ -106,12 +106,12 @@ public sealed class MultiplyStrings : ISolution<string>
         }
         IEnumerable<int> AlignResult(int[] arr)
         {
-            bool yieldable = false; 
-            foreach(var e in arr.Reverse())
+            bool yieldable = false;
+            foreach (var e in arr.Reverse())
             {
                 if (e == 0 && !yieldable)
                     continue;
-                else if(!yieldable)
+                else if (!yieldable)
                     yieldable = true;
                 yield return e;
             }
@@ -124,6 +124,6 @@ public sealed class MultiplyStrings : ISolution<string>
 
         if (result.Length == 0)
             result = [0];
-        return String.Join("",result);
+        return String.Join("", result);
     }
 }

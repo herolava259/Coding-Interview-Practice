@@ -11,7 +11,7 @@ namespace Agorithm.Tests.Arrays.Tests
     public class PermutationIITests
     {
         [Test]
-        [TestCase(new int[] {1,1,2})]
+        [TestCase(new int[] { 1, 1, 2 })]
         public void NormalCase(int[] nums)
         {
             _ = PermutationsIIProblem.PermuteUnique(nums);

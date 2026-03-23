@@ -26,7 +26,7 @@ public class ConcatenateOfArray : ISolution<int[]>
 
         results.Fill(0);
 
-        foreach(var num in nums)
+        foreach (var num in nums)
         {
             results[num] = num;
             results[num + nums.Length] = num;

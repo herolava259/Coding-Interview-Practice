@@ -15,6 +15,6 @@ public class WordLadderIITests
     public void NormalCase(string beginWord, string endWord, string[] wordList)
     {
         var actualResult = WordLadderIIProblem.FindLadders(beginWord, endWord, wordList);
-        Assert.AreEqual(0, 0);
+        Assert.That(0, Is.EqualTo(0));
     }
 }

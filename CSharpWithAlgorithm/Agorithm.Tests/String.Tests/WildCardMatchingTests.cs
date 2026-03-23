@@ -50,7 +50,7 @@ public class WildCardMatchingTests
 
 
     [Test]
-    [TestCase("ad", "a*", ExpectedResult =true)]
+    [TestCase("ad", "a*", ExpectedResult = true)]
     public bool SpecialCases1(string text, string pattern)
     {
         var sln = new WildcardMatching(text, pattern);
@@ -67,7 +67,7 @@ public class WildCardMatchingTests
             new Test(new Params("adceb", "*a?b"), true),
             new Test(new Params("adceb", "?a*b"), false),
             new Test (new Params("adceb", "?a?b"), true)
-            
+
         };
 
 

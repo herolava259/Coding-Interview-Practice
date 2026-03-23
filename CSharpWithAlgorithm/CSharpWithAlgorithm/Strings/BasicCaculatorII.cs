@@ -43,13 +43,13 @@ public static class BasicCaculatorII
         var prevIsOperator = true;
 
 
-        foreach(var c in s)
+        foreach (var c in s)
         {
             if (isOperator(c) && !prevIsOperator)
             {
-                if(operandBuilder.Length > 0) operandStack.Push(int.Parse(operandBuilder.ToString()));
+                if (operandBuilder.Length > 0) operandStack.Push(int.Parse(operandBuilder.ToString()));
                 operandBuilder.Clear();
-                while(operatorStack.TryPeek(out var prevOper) && (priority[prevOper] <= priority[c]))
+                while (operatorStack.TryPeek(out var prevOper) && (priority[prevOper] <= priority[c]))
                 {
                     var y = operandStack.Pop();
                     var x = operandStack.Pop();
@@ -59,17 +59,17 @@ public static class BasicCaculatorII
                 operatorStack.Push(c);
                 prevIsOperator = true;
             }
-            else if (isDigit(c) || isSign(c)) 
+            else if (isDigit(c) || isSign(c))
             {
                 operandBuilder.Append(c);
                 prevIsOperator = false;
             }
-       
+
         }
 
         if (operandBuilder.Length > 0) operandStack.Push(int.Parse(operandBuilder.ToString()));
 
-        while(operatorStack.TryPeek(out var oper))
+        while (operatorStack.TryPeek(out var oper))
         {
             var y = operandStack.Pop();
             var x = operandStack.Pop();

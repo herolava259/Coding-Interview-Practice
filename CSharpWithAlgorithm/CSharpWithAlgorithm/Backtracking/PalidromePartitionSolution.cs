@@ -19,20 +19,20 @@ public class PalidromePartitionSolution : ISolution<IList<IList<string>>>
 
     private void Backtrack(int k, int n, IList<string> partition)
     {
-        if(k == n)
+        if (k == n)
         {
             partitions.Add(partition.ToList());
             return;
         }
-        
-        for(int i = k+1; i <= n; i++)
+
+        for (int i = k + 1; i <= n; i++)
         {
             var substr = s.Substring(k, i - k);
             if (!IsPanlidrome(substr))
                 continue;
             partition.Add(substr);
             Backtrack(i, n, partition);
-            partition.RemoveAt(partition.Count-1);
+            partition.RemoveAt(partition.Count - 1);
         }
 
 
@@ -42,8 +42,10 @@ public class PalidromePartitionSolution : ISolution<IList<IList<string>>>
     {
         int firstP = 0, lastP = s.Length - 1;
 
-        while (firstP < lastP) {
-            if (s[firstP] != s[lastP]) {
+        while (firstP < lastP)
+        {
+            if (s[firstP] != s[lastP])
+            {
                 return false;
             }
             firstP++;

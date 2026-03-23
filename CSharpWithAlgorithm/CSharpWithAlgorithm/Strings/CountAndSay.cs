@@ -10,7 +10,7 @@ namespace CSharpWithAlgorithm.Strings;
 public sealed class CountAndSay : ISolution<string>
 {
     private readonly int n = 1;
-    public CountAndSay(int n =1)
+    public CountAndSay(int n = 1)
     {
         this.n = n;
     }
@@ -23,15 +23,15 @@ public sealed class CountAndSay : ISolution<string>
     {
         string currrROE = "1";
 
-        for(int i =1; i < n; i++)
+        for (int i = 1; i < n; i++)
         {
             StringBuilder sb = new StringBuilder();
             char prevC = currrROE[0];
             int counter = 1;
 
-            for(int j =1; j < currrROE.Length; ++j)
+            for (int j = 1; j < currrROE.Length; ++j)
             {
-                if(prevC !=  currrROE[j])
+                if (prevC != currrROE[j])
                 {
                     sb.Append(counter)
                       .Append(prevC);

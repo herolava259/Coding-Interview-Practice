@@ -13,7 +13,7 @@ public class FractionToRecurringDecimalTest
     [Test]
     public void DivisibleTwoOrFiveTests()
     {
-        Assert.AreEqual(true, FractionToRecurringDecimalProblem.OnlyDivisibleTwoOrFive(2));
+        Assert.That(FractionToRecurringDecimalProblem.OnlyDivisibleTwoOrFive(2), Is.EqualTo(true));
 
     }
 
@@ -27,6 +27,6 @@ public class FractionToRecurringDecimalTest
     //[TestCase(1, 6, "0.1(6)")]
     public void NormalCase(int numerator, int denominator, string expectedResult)
     {
-        Assert.AreEqual(expectedResult, FractionToRecurringDecimalProblem.FractionToDecimal(numerator, denominator));
+        Assert.That(FractionToRecurringDecimalProblem.FractionToDecimal(numerator, denominator), Is.EqualTo(expectedResult));
     }
 }

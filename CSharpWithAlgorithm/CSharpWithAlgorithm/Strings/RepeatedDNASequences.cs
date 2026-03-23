@@ -29,7 +29,7 @@ public static class RepeatedDNASequencesSolution
         {
             var sb = new StringBuilder();
 
-            for(int i =0; i < 10; ++i)
+            for (int i = 0; i < 10; ++i)
             {
                 var enc = bits & 3;
 
@@ -75,11 +75,11 @@ public static class RepeatedDNASequencesSolution
 
         seen.Add(curBitsWindow);
 
-        for(int i =10; i < s.Length; ++i)
+        for (int i = 10; i < s.Length; ++i)
         {
             curBitsWindow = shift(curBitsWindow, s[i]);
 
-            if(!seen.Add(curBitsWindow))
+            if (!seen.Add(curBitsWindow))
                 repeated.Add(curBitsWindow);
         }
 

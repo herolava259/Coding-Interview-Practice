@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace CSharpWithAlgorithm.Arrays;
 
-public static class NextPermutation
+public static class NextPermutationProblem
 {
-    public static int[] Solve(int[] nums)
+    public static void Solve(int[] nums)
     {
         int findMinimalSupremePosition(IList<int> sequence, int begin, int end, int val)
         {
@@ -63,17 +58,22 @@ public static class NextPermutation
 
         }
 
-        IList<int> nextPermutation(IList<int> sequence)
+        void nextPermutation(IList<int> sequence)
         {
-            var nextSequence = sequence.ToList();
+
             // ensure that lowerBoundIdx always greater than or equal 0 when calling the function.
-            var lowerBoundIdx = lowerBoundPositionOfNonIncreaseSubSequence(nextSequence);
-            var subsIdx = findMinimalSupremePosition(nextSequence, lowerBoundIdx + 1, nextSequence.Count - 1, nextSequence[lowerBoundIdx]);
-            swap(nextSequence, lowerBoundIdx, subsIdx);
-            internalReverse(nextSequence, lowerBoundIdx + 1, nextSequence.Count - 1);
-            return nextSequence;
+            var lowerBoundIdx = lowerBoundPositionOfNonIncreaseSubSequence(sequence);
+            if (lowerBoundIdx < 0)
+            {
+                internalReverse(sequence, 0);
+                return;
+            }
+            var subsIdx = findMinimalSupremePosition(sequence, lowerBoundIdx + 1, sequence.Count - 1, sequence[lowerBoundIdx]);
+            swap(sequence, lowerBoundIdx, subsIdx);
+            internalReverse(sequence, lowerBoundIdx + 1, sequence.Count - 1);
+
         }
 
-        return nextPermutation(nums).ToArray();
+        nextPermutation(nums);
     }
 }

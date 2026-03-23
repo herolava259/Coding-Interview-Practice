@@ -31,7 +31,7 @@ public class ShuffleTheArray : ISolution<int[]>
 
         int fastIndex = 0;
 
-        for(int i = 0; i < halfLength; ++i)
+        for (int i = 0; i < halfLength; ++i)
         {
             results[fastIndex++] = nums[i];
             results[fastIndex++] = nums[i + halfLength];

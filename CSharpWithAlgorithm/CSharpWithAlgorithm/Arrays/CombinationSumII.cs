@@ -19,11 +19,11 @@ public class CombinationSumII
 
         Array.Sort(keys);
 
-        void backtrack(int[] keys,int begin, IDictionary<int, int> tries, int total)
+        void backtrack(int[] keys, int begin, IDictionary<int, int> tries, int total)
         {
             if (total > target)
                 return;
-            if(total == target)
+            if (total == target)
             {
                 result.Add(tries.SelectMany(c => Enumerable.Repeat(c.Key, c.Value)).ToList());
                 return;
@@ -32,7 +32,7 @@ public class CombinationSumII
             if (begin >= keys.Length)
                 return;
 
-            for(int i = begin; i < keys.Length; ++i)
+            for (int i = begin; i < keys.Length; ++i)
             {
                 var elem = keys[i];
 
@@ -40,7 +40,7 @@ public class CombinationSumII
                 {
                     tries.Add(elem, freq);
 
-                    backtrack(keys,i+1, tries, total + freq * elem);
+                    backtrack(keys, i + 1, tries, total + freq * elem);
 
                     tries.Remove(elem);
                 }

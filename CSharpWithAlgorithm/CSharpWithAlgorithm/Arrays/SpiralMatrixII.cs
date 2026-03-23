@@ -12,10 +12,10 @@ public static class SpiralMatrixII
             return state switch
             {
                 0 => (1, 0, first, last, last),
-                1 => (2, -1, first, Math.Max(last-1, first), Math.Max(last - 1, first)),
+                1 => (2, -1, first, Math.Max(last - 1, first), Math.Max(last - 1, first)),
                 2 => (3, 0, first, last, first),
-                3 => (0, 1, Math.Min(first+1, last), last, Math.Min(first + 1, last)),
-                _ => (0, 1, first, Math.Max(first, last - 1), Math.Min(first + 1, last)),
+                3 => (0, 1, Math.Min(first + 1, last), last, Math.Min(first + 1, last)),
+                _ => (0, 1, Math.Min(first + 1, last), last, Math.Min(first + 1, last)),
             };
         }
 
@@ -35,9 +35,9 @@ public static class SpiralMatrixII
         {
             return state switch
             {
-                0 => pointer == last,
+                0 => pointer > last,
                 1 => false,
-                2 => pointer == first,
+                2 => pointer < first,
                 3 => false,
                 _ => false
             };
@@ -48,21 +48,21 @@ public static class SpiralMatrixII
             return state switch
             {
                 0 => false,
-                1 => pointer == last,
+                1 => pointer > last,
                 2 => false,
-                3 => pointer == first,
+                3 => pointer < first,
                 _ => false
             };
         }
 
 
 
-        var (stateX, deltaX, firstX, lastX, pointerX) = changeStateX(-1, 0, n-1);
-        var (stateY, deltaY, firstY, lastY, pointerY) = changeStateY(-1, 0, n-1);
+        var (stateX, deltaX, firstX, lastX, pointerX) = changeStateX(-1, -1, n - 1);
+        var (stateY, deltaY, firstY, lastY, pointerY) = changeStateY(-1, 0, n - 1);
 
-        for (int counter=1; counter<=n*n; ++counter)
+        for (int counter = 1; counter <= n * n; ++counter)
         {
-            if(endStateX(pointerX, firstX, lastX, stateX) ||  endStateY(pointerY, firstY, lastY, stateY))
+            if (endStateX(pointerX, firstX, lastX, stateX) || endStateY(pointerY, firstY, lastY, stateY))
             {
                 (stateX, deltaX, firstX, lastX, pointerX) = changeStateX(stateX, firstX, lastX);
                 (stateY, deltaY, firstY, lastY, pointerY) = changeStateY(stateY, firstY, lastY);

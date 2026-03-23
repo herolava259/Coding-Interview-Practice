@@ -46,11 +46,11 @@ public static class DifferentWaysToAddParentheses
 
         public OperatorType Type { get; init; }
 
-        public static readonly OperatorElement Add = new() { Type = OperatorType.Add};
+        public static readonly OperatorElement Add = new() { Type = OperatorType.Add };
         public static readonly OperatorElement Sub = new() { Type = OperatorType.Sub };
         public static readonly OperatorElement Mult = new() { Type = OperatorType.Mult };
 
-  
+
         public int Compute(int x, int y)
             => Type switch
             {
@@ -88,14 +88,14 @@ public static class DifferentWaysToAddParentheses
 
     public static IList<int> DiffWaysToCompute(string expression)
     {
-        
+
         IElement[] split(string expr)
         {
             var buffer = new StringBuilder();
 
             var result = new List<IElement>();
 
-            foreach(var e in expr)
+            foreach (var e in expr)
             {
                 if (OperatorElement.IsValid(e) && buffer.Length > 0)
                 {
@@ -103,11 +103,11 @@ public static class DifferentWaysToAddParentheses
                     buffer.Clear();
                 }
 
-                if(OperatorElement.IsValid(e))
+                if (OperatorElement.IsValid(e))
                 {
                     result.Add(OperatorElement.FromChar(e));
                 }
-                else if(Char.IsDigit(e))
+                else if (Char.IsDigit(e))
                 {
                     buffer.Append(e);
                 }
@@ -147,18 +147,18 @@ public static class DifferentWaysToAddParentheses
         {
             var calculator = operators[sep - 1];
 
-            foreach(var r1 in dp[high][sep])
-                foreach(var r2 in dp[sep - 1][low])
+            foreach (var r1 in dp[high][sep])
+                foreach (var r2 in dp[sep - 1][low])
                 {
                     yield return calculator.Compute(r2, r1);
                 }
         }
 
-        for(int i = 1; i < numOperand; i++)
+        for (int i = 1; i < numOperand; i++)
         {
-            for(int j = i-1; j >= 0; --j)
+            for (int j = i - 1; j >= 0; --j)
             {
-                for(int k = i; k > j; --k)
+                for (int k = i; k > j; --k)
                 {
                     dp[i][j].AddRange(computeBetween(i, j, k));
                 }
@@ -166,6 +166,6 @@ public static class DifferentWaysToAddParentheses
         }
 
 
-        return dp[numOperand-1][0];
+        return dp[numOperand - 1][0];
     }
 }
