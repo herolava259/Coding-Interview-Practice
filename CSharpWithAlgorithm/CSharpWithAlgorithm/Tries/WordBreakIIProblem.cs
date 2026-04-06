@@ -143,7 +143,8 @@ public static class WordBreakIIProblem
             if (calculated[k])
                 return memory[k];
             memory[k] = possibleWords[k].SelectMany(word => calculate(k + word.Length)
-                                                            .Select(suff => suff == string.Empty ? word : word + ' ' + suff))
+                                                            .Select(suff => suff == string.Empty ? word 
+                                                                                                 : word + ' ' + suff))
                                         .ToList();
 
             calculated[k] = true;

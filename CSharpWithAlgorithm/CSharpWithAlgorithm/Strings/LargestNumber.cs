@@ -41,7 +41,7 @@ public static class LargestNumberSolution
     }
     public static string Solve(int[] nums)
     {
-        var countZero = nums.Where(c => c == 0).Count();
+        var countZero = nums.Count(c => c == 0);
 
         nums = nums.Where(c => c != 0).ToArray();
 

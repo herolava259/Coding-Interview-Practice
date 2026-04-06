@@ -83,6 +83,6 @@ public static class RepeatedDNASequencesSolution
                 repeated.Add(curBitsWindow);
         }
 
-        return repeated.Select(c => decode(c)).ToList();
+        return repeated.Select(c => decode(c)).ToArray();
     }
 }
