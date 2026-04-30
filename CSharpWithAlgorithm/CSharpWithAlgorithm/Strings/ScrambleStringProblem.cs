@@ -1,8 +1,9 @@
-﻿using System.Text;
-
-namespace CSharpWithAlgorithm.Strings;
+﻿namespace CSharpWithAlgorithm.Strings;
 
 public static class ScrambleStringProblem
 {
-    
+    public static bool IsScramble(string s1, string s2)
+    {
+        return false;
+    }
 }

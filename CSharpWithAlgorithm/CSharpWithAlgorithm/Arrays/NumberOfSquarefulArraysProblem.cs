@@ -63,7 +63,8 @@ public static class NumberOfSquarefulArraysProblem
                     notPrime.Add(j);
                 }
             }
-            else if (!notPrime.Contains(i))
+
+            if (!notPrime.Contains(i))
             {
                 yield return i;
             }

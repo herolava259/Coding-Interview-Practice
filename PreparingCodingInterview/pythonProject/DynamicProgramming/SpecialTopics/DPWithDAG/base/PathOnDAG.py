@@ -1,6 +1,4 @@
 from typing import List, Tuple
-import functools as ftool
-import itertools as looptool
 
 
 
